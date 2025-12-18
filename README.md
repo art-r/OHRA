@@ -193,14 +193,11 @@ curl -v http://127.0.0.1:631
 ```
 .
 |____LICENSE
-|____1-RFClassifier # thesis tests for trying to classify LLM-generated outputs
-|____2-ModelSelection # LLM model selection
-|____3-ProtocolSelection # Protocol selection
-|____4-TestingStuff # Various testing scripts
 |____pyproject.toml # Dependency file
 |____poetry.lock # Dependency file with exact versions
-|____5-Experiments # Command testing analysis and general figure creation
+|____.env # Environment file for API keys
 |____src # The source directory of the Honeypot Prototype
+| |____docker-compose.yml # docker compose file for the honeypot
 | |____LogHandler # The Log Handler component
 | |____LLMHandler # The LLM Handler component
 | | |____prompts # system prompts for all Honeypot types
@@ -222,8 +219,7 @@ curl -v http://127.0.0.1:631
 | | |____http_honeypot.py
 | | |____base_honeypot.py
 | | |____ipp_honeypot.py
-| |____.env # Environment file for API keys
-| |____docker-compose.yml
+- -
 ```
 
 ## Honeypot Components
