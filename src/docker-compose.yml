@@ -1,0 +1,171 @@
+services:
+  llmhandler:
+    build:
+      context: ./LLMHandler
+      dockerfile: Dockerfile
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+    networks:
+      - ohra-network
+    ports:
+      - "127.0.0.1:8001:8000"
+
+  loghandler:
+    build:
+      context: ./LogHandler
+      dockerfile: Dockerfile
+    dns:
+      - 9.9.9.9
+    networks:
+      - ohra-network
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - logs:/app/session_logs
+      - logs:/app/error_logs
+      - data:/app/downloaded_content
+  
+  http-pot:
+    build:
+      context: ./Honeypots
+      dockerfile: DockerfileHTTP
+    environment:
+      LOG_HANDLER: 127.0.0.1:8000
+      LLM_HANDLER: 127.0.0.1:8001
+      CREDENTIALS_FILE: "*"
+      PYTHONUNBUFFERED: 1
+      LISTENING_PORT: 80
+    # ports: # remote to in-container
+    #   - "8080:8000"
+    # networks:
+    #   - ohra-network
+    network_mode: host
+    depends_on:
+      - llmhandler
+      - loghandler
+
+  ssh-pot:
+    build:
+      context: ./Honeypots
+      dockerfile: DockerfileSSH
+    environment:
+      LOG_HANDLER: 127.0.0.1:8000
+      LLM_HANDLER: 127.0.0.1:8001
+      LISTENING_INTERFACE: "0.0.0.0" # inside the container
+      CREDENTIALS_FILE: "*"
+      PYTHONUNBUFFERED: 1
+      LISTENING_PORT: 22
+    # ports:
+    #   - "8022:8000"
+    # networks:
+    #   - ohra-network
+    network_mode: host
+    depends_on:
+      - llmhandler
+      - loghandler
+
+  telnet-pot:
+    build:
+      context: ./Honeypots
+      dockerfile: DockerfileTelnet
+    environment:
+      LOG_HANDLER: 127.0.0.1:8000
+      LLM_HANDLER: 127.0.0.1:8001
+      LISTENING_INTERFACE: "0.0.0.0" # inside the container
+      CREDENTIALS_FILE: "*"
+      PYTHONUNBUFFERED: 1
+      LISTENING_PORT: 23
+    # ports:
+    #   - "8023:8000"
+    # networks:
+    #   - ohra-network
+    network_mode: host
+    depends_on:
+      - llmhandler
+      - loghandler
+
+  ftp-pot:
+    build:
+      context: ./Honeypots
+      dockerfile: DockerfileFTP
+    environment:
+      LOG_HANDLER: 127.0.0.1:8000
+      LLM_HANDLER: 127.0.0.1:8001
+      CREDENTIALS_FILE: "*"
+      LISTENING_INTERFACE: "0.0.0.0" # inside the container
+      PYTHONUNBUFFERED: 1
+      LISTENING_PORT: 21
+    # ports:
+    #   - "8021:8000"
+    # networks:
+    #   - ohra-network
+    network_mode: host
+    depends_on:
+      - llmhandler
+      - loghandler
+
+  smtp-pot:
+    build:
+      context: ./Honeypots
+      dockerfile: DockerfileSMTP
+    environment:
+      LOG_HANDLER: 127.0.0.1:8000
+      LLM_HANDLER: 127.0.0.1:8001
+      CREDENTIALS_FILE: "*"
+      LISTENING_INTERFACE: "0.0.0.0" # inside the container
+      PYTHONUNBUFFERED: 1
+      LISTENING_PORT: 25
+    # ports:
+    #   - "8025:8000"
+    # networks:
+    #   - ohra-network
+    network_mode: host
+    depends_on:
+      - llmhandler
+      - loghandler
+  
+  snmp-pot:
+    build:
+      context: ./Honeypots
+      dockerfile: DockerfileSNMP
+    environment:
+      LOG_HANDLER: 127.0.0.1:8000
+      LLM_HANDLER: 127.0.0.1:8001
+      CREDENTIALS_FILE: "*"
+      LISTENING_INTERFACE: "0.0.0.0" # inside the container
+      PYTHONUNBUFFERED: 1
+      LISTENING_PORT: 161
+    # ports:
+    #   - "8161:8000"
+    # networks:
+    #   - ohra-network
+    network_mode: host
+    depends_on:
+      - llmhandler
+      - loghandler
+
+  ipp-pot:
+    build:
+      context: ./Honeypots
+      dockerfile: DockerfileIPP
+    environment:
+      LOG_HANDLER: 127.0.0.1:8000
+      LLM_HANDLER: 127.0.0.1:8001
+      CREDENTIALS_FILE: "*"
+      PYTHONUNBUFFERED: 1
+      LISTENING_PORT: 631
+    # ports:
+    #   - "8631:8000"
+    # networks:
+    #   - ohra-network
+    network_mode: host
+    depends_on:
+      - llmhandler
+      - loghandler
+
+networks:
+  ohra-network:
+
+volumes:
+  logs:
+  data: 
