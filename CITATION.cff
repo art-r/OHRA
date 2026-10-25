@@ -1,7 +1,6 @@
 cff-version: 1.2.0
 message: "If you use OHRA in your research, please cite the following publication."
 title: "OHRA: Dynamic Multi-protocol LLM-Based Cyber Deception"
-type: article 
 authors:
   - family-names: Safargalieva
     given-names: Anastasia
@@ -9,9 +8,6 @@ authors:
     given-names: Artur
   - family-names: Vasilomanolakis
     given-names: Emmanouil
-year: 2026
-publisher: "Springer Nature Switzerland"
-start: 109
-end: 128
-isbn: "978-3-032-14782-0"
-doi: "10.1007/978-3-032-14782-0_7"
+doi: 10.1007/978-3-032-14782-0_7
+date-released: 2026-04-01
+url: "https://github.com/art-r/OHRA"
