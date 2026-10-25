@@ -1,0 +1,42 @@
+cff-version: 1.2.0
+message: "If you use OHRA in your research, please cite the following publication."
+title: "OHRA: Dynamic Multi-protocol LLM-Based Cyber Deception"
+type: conference-paper
+authors:
+  - family-names: Safargalieva
+    given-names: Anastasia
+  - family-names: Rüffer
+    given-names: Artur
+  - family-names: Vasilomanolakis
+    given-names: Emmanouil
+editors:
+  - family-names: Matulevičius
+    given-names: Raimundas
+  - family-names: Kamm
+    given-names: Liina
+  - family-names: Iqbal
+    given-names: Mubashar
+year: 2026
+collection-title: "Secure IT Systems"
+publisher: "Springer Nature Switzerland"
+address: "Cham"
+start: 109
+end: 128
+isbn: "978-3-032-14782-0"
+doi: "10.1007/978-3-032-14782-0_7"
+abstract: >-
+  Honeypots aid cyber defense but traditional designs demand heavy manual
+  setup and support few protocols. We introduce OHRA, a modular, extensible
+  LLM-driven honeypot that supports multiple protocols (SSH, Telnet, HTTP,
+  FTP, SMTP, SNMP, IPP) and can integrate different LLM providers. OHRA
+  wraps the model with session memory and prompt control to generate
+  realistic, context-aware responses with less configuration effort. We
+  evaluate OHRA against Cowrie and a recent LLM-based honeypot using
+  curated malware commands and a real-world Internet deployment. OHRA is
+  among the first honeypots to demonstrate a unified LLM-based architecture
+  across several protocols: SSH, Telnet, and HTTP are fully interactive,
+  while FTP, SMTP, IPP, and SNMP are currently implemented in partial form.
+  Results show higher response realism, improved session handling, and
+  greater deceptiveness in comparison to prior systems. This work lays the
+  groundwork for scalable and adaptive multi-protocol deception platforms.
+
